@@ -2,24 +2,24 @@
   "version": "2.0.0",
   "fields": [
     {
-      "field": "API_KEY","
-      "displayName": "Mailerlite API Key",
+      "field": "API_KEY",
+      "displayName": "Webex API Key",
       "type": "String",
       "minLength": 4,
       "maxLength": 60,
       "required": true,
-      "description": "Mailerlite API Key",
-      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-      "helpSection": "You can generate an API key by opening MailerLite, navigating to Integrations and choosing MailerLite API. Then click \"Generate new token\". "
+      "description": "Webex API Key",
+      "example": "YmU3NjZlNDItZjZiMy00NzIwLTgwYzItZjY2Zjc5ZmNhYWQwZWIxMZE8OWOtMmQl_PF84_1eb65fdf-0000-417f-9974-ad52cae0e10f",
+      "helpSection": "Go to https://developer.webex.com/docs/getting-started and you will find your personal access token"
     },
     {
       "field": "AUTH_TYPE",
-      "displayName": "Mailerlite Auth Type",
+      "displayName": "Webex Auth Type",
       "type": "String",
       "minLength": 4,
       "maxLength": 60,
       "required": true,
-      "description": "Mailerlite API Auth Type",
+      "description": "Webex API Auth Type",
       "default": "API_KEY",
       "example": "API_KEY",
       "helpSection": ""
