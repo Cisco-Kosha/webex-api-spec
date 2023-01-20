@@ -23,6 +23,18 @@
       "default": "API_KEY",
       "example": "API_KEY",
       "helpSection": ""
+    },
+    {
+      "field": "SERVER_URL",
+      "displayName": "Webex Server URL",
+      "type": "String",
+      "minLength": 4,
+      "maxLength": 60,
+      "required": true,
+      "description": "Webex API Server URL",
+      "default": "https://webexapis.com",
+      "example": "https://webexapis.com",
+      "helpSection": "Use the default value https://webexapis.com"
     }
   ]
 }
