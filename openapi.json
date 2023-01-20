@@ -1,0 +1,1327 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"contact": {
+			"email": "support@webex.com"
+		},
+		"description": "",
+		"termsOfService": "https://webex.com",
+		"title": "Webex API",
+		"version": "1.0.6"
+	},
+	"paths": {
+		"/v1/rooms": {
+			"get": {
+				"parameters": [{
+						"description": "List rooms associated with a team, by ID. Cannot be set in combination with orgPublicSpaces.",
+						"in": "query",
+						"name": "teamId",
+						"required": false,
+						"schema": {
+							"type": "integer"
+						}
+					},
+					{
+						"description": "List rooms by type. Cannot be set in combination with orgPublicSpaces. Possible values: direct, group",
+						"in": "query",
+						"name": "type",
+						"required": false,
+						"schema": {
+							"enum": [
+								"direct",
+								"group"
+							]
+						}
+					},
+					{
+						"description": "Filters rooms, that were made public after this time. See madePublic timestamp",
+						"in": "query",
+						"name": "from",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Filters rooms, that were made public after this time. See madePublic timestamp",
+						"in": "query",
+						"name": "sortBy",
+						"required": false,
+						"schema": {
+							"enum": [
+								"id",
+								"created",
+								"lastactivity"
+							]
+						}
+					},
+					{
+						"description": "Filters rooms, that were made public before this time. See madePublic timestamp",
+						"in": "query",
+						"name": "to",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "Shows the org's public spaces joined and unjoined. When set the result list is sorted by the madePublic timestamp.",
+						"in": "query",
+						"name": "orgPublicSpaces",
+						"required": false,
+						"schema": {
+							"type": "boolean"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Rooms"
+								}
+							}
+						},
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"rooms"
+				],
+				"description": "list all rooms",
+				"operationId": "list_all_rooms",
+				"summary": "list all of your rooms"
+			}
+		},
+		"/v1/rooms/{roomId}": {
+			"get": {
+				"parameters": [{
+					"description": "Shows details for a room, by ID.",
+					"in": "path",
+					"name": "roomId",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SingleRoom"
+								}
+							}
+						},
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"rooms"
+				],
+				"description": "list single room",
+				"operationId": "list_single_room",
+				"summary": "list single room"
+			},
+			"delete": {
+				"parameters": [{
+					"description": "Must provide valid room id",
+					"in": "path",
+					"name": "roomId",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"204": {
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"rooms"
+				],
+				"description": "delete single room",
+				"operationId": "delete_single_room",
+				"summary": "delete single room"
+			}
+		},
+		"/v1/people": {
+			"get": {
+				"parameters": [{
+						"description": "List people with this email address.",
+						"in": "query",
+						"name": "email",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "List people whose name starts with this string. For non-admin requests, either this or email are required.",
+						"in": "query",
+						"name": "displayName",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "List people by ID. Separate by commas if providing more than one ID",
+						"in": "query",
+						"name": "id",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "List people by orgID.",
+						"in": "query",
+						"name": "orgId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"description": "List people present in this location.",
+						"in": "query",
+						"name": "locationId",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/People"
+								}
+							}
+						},
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"people"
+				],
+				"description": "list all people",
+				"operationId": "list_all_people",
+				"summary": "list all people"
+			}
+		},
+		"/v1/people/{personId}": {
+			"get": {
+				"parameters": [{
+					"description": "Shows details for a person, by ID.",
+					"in": "path",
+					"name": "personId",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SinglePerson"
+								}
+							}
+						},
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"people"
+				],
+				"description": "list single people",
+				"operationId": "list_single_people",
+				"summary": "list single person"
+			},
+			"delete": {
+				"parameters": [{
+					"description": "Must provide valid person id",
+					"in": "path",
+					"name": "personId",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"204": {
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"people"
+				],
+				"description": "delete single person",
+				"operationId": "delete_single_people",
+				"summary": "delete single person"
+			}
+		},
+		"/v1/teams": {
+			"get": {
+				"parameters": [{
+					"description": "Limit the maximum number of teams in the response.",
+					"in": "query",
+					"name": "max",
+					"required": false,
+					"schema": {
+						"type": "integer"
+					}
+				}],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Teams"
+								}
+							}
+						},
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"teams"
+				],
+				"description": "list all teams",
+				"operationId": "list_all_teams",
+				"summary": "list all teams"
+			},
+			"post": {
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTeam"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Teams"
+								}
+							}
+						},
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"teams"
+				],
+				"description": "create team",
+				"operationId": "create_team",
+				"summary": "create team"
+			}
+		},
+		"/v1/teams/{teamId}": {
+			"get": {
+				"parameters": [{
+					"description": "The unique identifier for the team.",
+					"in": "path",
+					"name": "teamId",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Teams"
+								}
+							}
+						},
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"teams"
+				],
+				"description": "list single team",
+				"operationId": "list_single_team",
+				"summary": "list single team"
+			},
+			"delete": {
+				"parameters": [{
+					"description": "Must provide valid team id",
+					"in": "path",
+					"name": "teamId",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"204": {
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"teams"
+				],
+				"description": "delete single team",
+				"operationId": "delete_single_team",
+				"summary": "delete single team"
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"CreateTeam": {
+				"type": "object",
+				"properties": {
+					"description": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					}
+				}
+			},
+			"Teams": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"created": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"description",
+					"created"
+				]
+			},
+			"People": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"emails": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+
+						},
+						"phoneNumbers": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"type": {
+										"type": "string"
+									},
+									"value": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"type",
+									"value"
+								]
+							}
+						},
+						"extension": {
+							"type": "string"
+						},
+						"locationId": {
+							"type": "string"
+						},
+						"displayName": {
+							"type": "string"
+						},
+						"nickName": {
+							"type": "string"
+						},
+						"firstName": {
+							"type": "string"
+						},
+						"lastName": {
+							"type": "string"
+						},
+						"avatar": {
+							"type": "string"
+						},
+						"orgId": {
+							"type": "string"
+						},
+						"roles": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"licenses": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+
+						},
+						"department": {
+							"type": "string"
+						},
+						"manager": {
+							"type": "string"
+						},
+						"managerId": {
+							"type": "string"
+						},
+						"title": {
+							"type": "string"
+						},
+						"addresses": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"country": {
+										"type": "string"
+									},
+									"locality": {
+										"type": "string"
+									},
+									"region": {
+										"type": "string"
+									},
+									"streetAddress": {
+										"type": "string"
+									},
+									"type": {
+										"type": "string"
+									},
+									"postalCode": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"country",
+									"locality",
+									"region",
+									"streetAddress",
+									"type",
+									"postalCode"
+								]
+							}
+
+						},
+						"created": {
+							"type": "string"
+						},
+						"lastModified": {
+							"type": "string"
+						},
+						"timezone": {
+							"type": "string"
+						},
+						"lastActivity": {
+							"type": "string"
+						},
+						"siteUrls": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+
+						},
+						"sipAddresses": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+
+						},
+						"status": {
+							"type": "string"
+						},
+						"invitePending": {
+							"type": "string"
+						},
+						"loginEnabled": {
+							"type": "string"
+						},
+						"type": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"id",
+						"emails",
+						"phoneNumbers",
+						"extension",
+						"locationId",
+						"displayName",
+						"nickName",
+						"firstName",
+						"lastName",
+						"avatar",
+						"orgId",
+						"roles",
+						"licenses",
+						"department",
+						"manager",
+						"managerId",
+						"title",
+						"addresses",
+						"created",
+						"lastModified",
+						"timezone",
+						"lastActivity",
+						"siteUrls",
+						"sipAddresses",
+						"status",
+						"invitePending",
+						"loginEnabled",
+						"type"
+					]
+				}
+			},
+			"SinglePerson": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"emails": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"phoneNumbers": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"type": {
+									"type": "string"
+								},
+								"value": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"type",
+								"value"
+							]
+						}
+					},
+					"extension": {
+						"type": "string"
+					},
+					"locationId": {
+						"type": "string"
+					},
+					"displayName": {
+						"type": "string"
+					},
+					"nickName": {
+						"type": "string"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"avatar": {
+						"type": "string"
+					},
+					"orgId": {
+						"type": "string"
+					},
+					"roles": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"licenses": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"department": {
+						"type": "string"
+					},
+					"manager": {
+						"type": "string"
+					},
+					"managerId": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"addresses": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"country": {
+									"type": "string"
+								},
+								"locality": {
+									"type": "string"
+								},
+								"region": {
+									"type": "string"
+								},
+								"streetAddress": {
+									"type": "string"
+								},
+								"type": {
+									"type": "string"
+								},
+								"postalCode": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"country",
+								"locality",
+								"region",
+								"streetAddress",
+								"type",
+								"postalCode"
+							]
+						}
+					},
+					"created": {
+						"type": "string"
+					},
+					"lastModified": {
+						"type": "string"
+					},
+					"timezone": {
+						"type": "string"
+					},
+					"lastActivity": {
+						"type": "string"
+					},
+					"siteUrls": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"sipAddresses": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						}
+					},
+					"status": {
+						"type": "string"
+					},
+					"invitePending": {
+						"type": "string"
+					},
+					"loginEnabled": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"emails",
+					"phoneNumbers",
+					"extension",
+					"locationId",
+					"displayName",
+					"nickName",
+					"firstName",
+					"lastName",
+					"avatar",
+					"orgId",
+					"roles",
+					"licenses",
+					"department",
+					"manager",
+					"managerId",
+					"title",
+					"addresses",
+					"created",
+					"lastModified",
+					"timezone",
+					"lastActivity",
+					"siteUrls",
+					"sipAddresses",
+					"status",
+					"invitePending",
+					"loginEnabled",
+					"type"
+				]
+			},
+			"Rooms": {
+				"type": "array",
+				"items": {
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"title": {
+							"type": "string"
+						},
+						"type": {
+							"type": "string"
+						},
+						"isLocked": {
+							"type": "boolean"
+						},
+						"teamId": {
+							"type": "string"
+						},
+						"lastActivity": {
+							"type": "string"
+						},
+						"creatorId": {
+							"type": "string"
+						},
+						"created": {
+							"type": "string"
+						},
+						"ownerId": {
+							"type": "string"
+						},
+						"classificationId": {
+							"type": "string"
+						},
+						"isAnnouncementOnly": {
+							"type": "boolean"
+						},
+						"isReadOnly": {
+							"type": "boolean"
+						},
+						"isPublic": {
+							"type": "boolean"
+						},
+						"madePublic": {
+							"type": "string"
+						},
+						"description": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"id",
+						"title",
+						"type",
+						"isLocked",
+						"teamId",
+						"lastActivity",
+						"creatorId",
+						"created",
+						"ownerId",
+						"classificationId",
+						"isAnnouncementOnly",
+						"isReadOnly",
+						"isPublic",
+						"madePublic",
+						"description"
+					]
+				},
+				"required": [
+					"items"
+				]
+			},
+			"SingleRoom": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					},
+					"isLocked": {
+						"type": "boolean"
+					},
+					"teamId": {
+						"type": "string"
+					},
+					"lastActivity": {
+						"type": "string"
+					},
+					"creatorId": {
+						"type": "string"
+					},
+					"created": {
+						"type": "string"
+					},
+					"ownerId": {
+						"type": "string"
+					},
+					"classificationId": {
+						"type": "string"
+					},
+					"isAnnouncementOnly": {
+						"type": "boolean"
+					},
+					"isReadOnly": {
+						"type": "boolean"
+					},
+					"isPublic": {
+						"type": "boolean"
+					},
+					"madePublic": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"type",
+					"isLocked",
+					"teamId",
+					"lastActivity",
+					"creatorId",
+					"created",
+					"ownerId",
+					"classificationId",
+					"isAnnouncementOnly",
+					"isReadOnly",
+					"isPublic",
+					"madePublic",
+					"description"
+				]
+			},
+			"CreateUser": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"fields": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"last_name": {
+								"type": "string"
+							}
+						}
+					},
+					"groups": {
+						"type": "object"
+					},
+					"status": {
+						"type": "string"
+					}
+				}
+			},
+			"Subscriber": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"source": {
+						"type": "string"
+					},
+					"sent": {
+						"type": "integer"
+					},
+					"opens_count": {
+						"type": "integer"
+					},
+					"clicks_count": {
+						"type": "integer"
+					},
+					"open_rate": {
+						"type": "integer"
+					},
+					"click_rate": {
+						"type": "integer"
+					},
+					"ip_address": {
+						"type": "string"
+					},
+					"subscribed_at": {
+						"type": "string"
+					},
+					"created_at": {
+						"type": "string"
+					},
+					"updated_at": {
+						"type": "string"
+					},
+					"fields": {
+						"type": "object",
+						"properties": {
+							"city": {
+								"type": "string"
+							},
+							"company": {
+								"type": "string"
+							},
+							"county": {
+								"type": "string"
+							},
+							"last_name": {
+								"type": "string"
+							},
+							"phone": {
+								"type": "string"
+							},
+							"state": {
+								"type": "string"
+							},
+							"z_i_p": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			"ListAllSubscribers": {
+				"type": "object",
+				"additionalProperties": true,
+				"properties": {
+					"data": {
+						"type": "array",
+						"items": {
+							"properties": {
+								"schema": {
+									"$ref": "#/components/schemas/Subscriber"
+								}
+							}
+						}
+					},
+					"links": {
+						"type": "object",
+						"properties": {
+							"first": {
+								"type": "string"
+							},
+							"last": {
+								"type": "string"
+							},
+							"prev": {
+								"type": "string"
+							},
+							"next": {
+								"type": "string"
+							}
+						}
+					},
+					"meta": {
+						"type": "object",
+						"properties": {
+							"path": {
+								"type": "string"
+							},
+							"per_page": {
+								"type": "string"
+							},
+							"next_cursor": {
+								"type": "string"
+							},
+							"prev_cursor": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			},
+			"ListAllSegments": {
+				"type": "object",
+				"additionalProperties": true,
+				"properties": {
+					"data": {
+						"type": "array",
+						"items": {
+							"additionalProperties": true,
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"total": {
+									"type": "integer"
+								},
+								"open_rate": {
+									"type": "object",
+									"properties": {
+										"float": {
+											"type": "integer"
+										},
+										"string": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"float",
+										"string"
+									]
+								},
+								"click_rate": {
+									"type": "object",
+									"properties": {
+										"float": {
+											"type": "integer"
+										},
+										"string": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"float",
+										"string"
+									]
+								},
+								"created_at": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"links": {
+						"type": "object",
+						"properties": {
+							"first": {
+								"type": "string"
+							},
+							"last": {
+								"type": "string"
+							},
+							"prev": {
+								"type": "string"
+							},
+							"next": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"first",
+							"last",
+							"prev",
+							"next"
+						]
+					},
+					"meta": {
+						"type": "object",
+						"properties": {
+							"current_page": {
+								"type": "integer"
+							},
+							"from": {
+								"type": "integer"
+							},
+							"last_page": {
+								"type": "integer"
+							},
+							"links": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"url": {
+											"type": "string"
+										},
+										"label": {
+											"type": "string"
+										},
+										"active": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"url",
+										"label",
+										"active"
+									]
+								}
+							},
+							"path": {
+								"type": "string"
+							},
+							"per_page": {
+								"type": "integer"
+							},
+							"to": {
+								"type": "integer"
+							},
+							"total": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"externalDocs": {
+		"description": "Find out more about Webex APIs",
+		"url": "https://developer.webex.com"
+	}
+}
