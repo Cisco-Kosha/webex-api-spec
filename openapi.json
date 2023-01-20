@@ -9,6 +9,9 @@
 		"title": "Webex API",
 		"version": "1.0.6"
 	},
+        "servers": [{
+		"url": "/"
+	}],
 	"paths": {
 		"/v1/rooms": {
 			"get": {
