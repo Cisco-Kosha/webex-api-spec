@@ -546,7 +546,7 @@
 				"operationId": "create_message",
 				"summary": "create single team"
 			}
-		},
+		}
 	},
 	"components": {
 		"schemas": {
