@@ -544,7 +544,7 @@
 				],
 				"description": "create message",
 				"operationId": "create_message",
-				"summary": "create single team"
+				"summary": "create single message"
 			}
 		}
 	},
