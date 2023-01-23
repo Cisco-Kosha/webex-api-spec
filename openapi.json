@@ -499,14 +499,343 @@
 				"tags": [
 					"teams"
 				],
-				"description": "delete single team",
-				"operationId": "delete_single_team",
-				"summary": "delete single team"
+				"description": "delete team",
+				"operationId": "delete_team",
+				"summary": "delete team"
 			}
-		}
+		},
+		"/v1/messages": {
+			"post": {
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateMessage"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateMessageResponse"
+								}
+							}
+						},
+						"description": "successful operation"
+					},
+					"400": {
+						"description": "There was an error when processing your request. Please adjust your request based on the endpoint requirements and try again."
+					},
+					"401": {
+						"description": "The provided API token is invalid."
+					},
+					"403": {
+						"description": "The action is denied for that account or a particular API token."
+					},
+					"422": {
+						"description": "There was a validation error found when processing the request. Please adjust it based on the endpoint requirements and try again."
+					}
+				},
+				"tags": [
+					"messages"
+				],
+				"description": "create message",
+				"operationId": "create_message",
+				"summary": "create single team"
+			}
+		},
 	},
 	"components": {
 		"schemas": {
+		  "CreateMessage": {
+        "type": "object",
+        "properties": {
+          "roomId": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "toPersonId": {
+            "type": "string"
+          },
+          "toPersonEmail": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "markdown": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items":
+              {
+                "type": "string"
+              }
+          },
+          "attachments": {
+            "type": "array",
+            "items":
+              {
+                "type": "object",
+                "properties": {
+                  "contentType": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "version": {
+                        "type": "string"
+                      },
+                      "body": {
+                        "type": "array",
+                        "items":
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "text": {
+                                "type": "string"
+                              },
+                              "size": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "text",
+                              "size"
+                            ]
+                          }
+                      },
+                      "actions": {
+                        "type": "array",
+                        "items":
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "url": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "url",
+                              "title"
+                            ]
+                          }
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "version",
+                      "body",
+                      "actions"
+                    ]
+                  }
+                },
+                "required": [
+                  "contentType",
+                  "content"
+                ]
+              }
+          }
+        },
+        "required": [
+          "roomId",
+          "parentId",
+          "toPersonId",
+          "toPersonEmail",
+          "text",
+          "markdown",
+          "files",
+          "attachments"
+        ]
+      },
+		  "CreateMessageResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "parentId": {
+            "type": "string"
+          },
+          "roomId": {
+            "type": "string"
+          },
+          "roomType": {
+            "type": "string"
+          },
+          "toPersonId": {
+            "type": "string"
+          },
+          "toPersonEmail": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "markdown": {
+            "type": "string"
+          },
+          "html": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": 
+              {
+                "type": "string"
+              }
+          },
+          "personId": {
+            "type": "string"
+          },
+          "personEmail": {
+            "type": "string"
+          },
+          "mentionedPeople": {
+            "type": "array",
+            "items":
+              {
+                "type": "string"
+              }
+          },
+          "mentionedGroups": {
+            "type": "array",
+            "items": 
+              {
+                "type": "string"
+              }
+          },
+          "attachments": {
+            "type": "array",
+            "items":
+              {
+                "type": "object",
+                "properties": {
+                  "contentType": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "version": {
+                        "type": "string"
+                      },
+                      "body": {
+                        "type": "array",
+                        "items": 
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "text": {
+                                "type": "string"
+                              },
+                              "size": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "text",
+                              "size"
+                            ]
+                          }
+                      },
+                      "actions": {
+                        "type": "array",
+                        "items":
+                          {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "url": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "url",
+                              "title"
+                            ]
+                          }
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "version",
+                      "body",
+                      "actions"
+                    ]
+                  }
+                },
+                "required": [
+                  "contentType",
+                  "content"
+                ]
+              }
+          },
+          "created": {
+            "type": "string"
+          },
+          "updated": {
+            "type": "string"
+          },
+          "isVoiceClip": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "parentId",
+          "roomId",
+          "roomType",
+          "toPersonId",
+          "toPersonEmail",
+          "text",
+          "markdown",
+          "html",
+          "files",
+          "personId",
+          "personEmail",
+          "mentionedPeople",
+          "mentionedGroups",
+          "attachments",
+          "created",
+          "updated",
+          "isVoiceClip"
+        ]
+      },
 			"CreateTeam": {
 				"type": "object",
 				"properties": {
