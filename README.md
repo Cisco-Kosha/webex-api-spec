@@ -1,5 +1,7 @@
 # Kosha Webex Messaging Connector
 
+![Webex](images/webex.png)
+
 Webex is known for its video conferencing and screen sharing, but messaging is a core element of the platform due to the relaxed and straightforward nature of the medium. Messages are conversational, fluid, and natural without requiring the participants of the chat to be engaged at that very moment. Participants can review and respond to chats when its convenient to their needs and circumstances.
 
 The Messaging API is an easy-to-use Restful platform that allows you to create, update, and delete messages. Every message is tagged with sender information (who wrote the message) and the local timestamp (what time did they sent it relative to you). Alternatively, you can change the format of the messages sent (between plain text or markdown) or send a file attachment along with your message to the chat room.
