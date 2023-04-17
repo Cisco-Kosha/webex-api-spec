@@ -38,9 +38,24 @@ People are registered users of Webex. Use the People API to list, create, update
 
 ## Example Usage
 
-For methods that accept request parameters the platform accepts either `application/json` or `application/x-www-form-urlencoded` content types and currently only supports returning data in `application/json` format.
+The following request creates a message in a room: 
 
-< sdk example? >
+```
+curl --request POST \
+  --header "Authorization: Bearer ACCESS_TOKEN" \
+  --url https://webexapis.com/v1/messages
+{
+  "roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vYmJjZWIxYWQtNDNmMS0zYjU4LTkxNDctZjE0YmIwYzRkMTU0",
+  "parentId": "Y2lzY29zcGFyazovL3VzL01FU1NBR0UvZWM1ZTIzZjAtN2RhMS0xMWU5LTg2NTgtZTkzYzNiODZjZmFm",
+  "toPersonId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMDZkNzFhNS0wODMzLTRmYTUtYTcyYS1jYzg5YjI1ZWVlMmX",
+  "toPersonEmail": "julie@example.com",
+  "text": "PROJECT UPDATE - A new project plan has been published on Box: http://box.com/s/lf5vj. The PM for this project is Mike C. and the Engineering Manager is Jane W.",
+  "markdown": "**PROJECT UPDATE** A new project plan has been published [on Box](http://box.com/s/lf5vj). The PM for this project is <@personEmail:mike@example.com> and the Engineering Manager is <@personEmail:jane@example.com>.",
+  "files": [
+    "http://www.example.com/images/media.png"
+  ],
+}
+```
 
 ## Authentication
 
