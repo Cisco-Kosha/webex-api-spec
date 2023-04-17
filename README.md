@@ -1,5 +1,7 @@
 # Kosha Webex Messaging Connector
 
+![Webex](images/webex.png)
+
 Primarily known for its video conferencing capabilities, the Webex platform also includes a powerful messaging application. 
 
 Using the Kosha Webex Messaging connector, you can perform REST API operations to create, update, and delete messages. Using the Webex Messaging API, your Kosha workflow or application can directly access the Webex platform to:
