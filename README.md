@@ -14,7 +14,9 @@ Using the Kosha Webex Messaging connector, you can perform REST API operations t
 
 ## Useful Actions 
 
-You can use the Kosha Webex Messaging connector to perform several useful operations to 
+You can use the Kosha Webex Messaging connector to perform to manage messages, rooms, teams, and people.  
+
+Refer to the Webex connector [API specification](openapi.json) for details.
 
 ### Messages
 
@@ -33,8 +35,6 @@ Teams are groups of people with a set of rooms that are visible to all members o
 ### People
 
 People are registered users of Webex. Use the People API to list, create, update, and delete users.
-
-Refer to the Webex connector [API specification](openapi.json) for details.
 
 ## Example Usage
 
