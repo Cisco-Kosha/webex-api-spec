@@ -59,4 +59,4 @@ curl --request POST \
 
 ## Authentication
 
-To use the Webex REST API, you need a Webex account. The Kosha Webex Messaging connector uses `API_KEY` based auth using your personal access token.
+To use the Webex REST API, you need a Webex account. The Kosha Webex Messaging connector uses `API_KEY` based auth using your [personal access token](https://developer.webex.com/docs/getting-started#/docs/getting-started#personal-access-token).
