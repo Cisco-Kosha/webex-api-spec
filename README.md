@@ -28,7 +28,7 @@ You must be a member of a space to target it with the Messaging API.
 
 Rooms are virtual meeting spaces where people post messages and collaborate on work. Use the Rooms API to create and delete rooms and update rooms to change their titles or make them public.
 
-### Teams
+### Teams
 
 Teams are groups of people with a set of rooms that are visible to all members of that team. Use the Teams API to create and delete teams and update teams to change their names.
 
