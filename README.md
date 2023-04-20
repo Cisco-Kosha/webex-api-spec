@@ -4,7 +4,7 @@
 
 Primarily known for its video conferencing capabilities, the Webex platform also includes a powerful messaging application. 
 
-Using the Kosha Webex Messaging connector, you can perform REST API operations to create, update, and delete messages. Using the Webex Messaging API, your Kosha workflow or application can directly access the Webex platform to:
+The Kosha Webex Messaging connector enables you to perform REST API operations to create, update, and delete messages, rooms, and teams. Using the Webex Messaging API, your Kosha workflow or custom application can directly access the Webex platform to:
 
 * Create a Webex space and invite people
 * Search for people in your company
@@ -21,8 +21,6 @@ Refer to the Kosha Webex connector [API specification](openapi.json) for details
 ### Messages
 
  In Webex, messages are sent directly between users or between multiple users in rooms. Webex displays each message on its own line along with a timestamp and sender information. You can send messages formatted in plain text or Markdown, and send file attachments along with your messages.
-
-You must be a member of a space to target it with the Messaging API.
 
 ### Rooms
 
