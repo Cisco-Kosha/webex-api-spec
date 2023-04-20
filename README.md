@@ -20,19 +20,35 @@ Refer to the Kosha Webex connector [API specification](openapi.json) for details
 
 ### Messages
 
- In Webex, messages are sent directly between users or between multiple users in rooms. Webex displays each message on its own line along with a timestamp and sender information. You can send messages formatted in plain text or Markdown, and send file attachments along with your messages.
+ In Webex, messages are sent directly between users or between multiple users in rooms. Use the messages API to send messages.
+
+* `POST /v1/messages`: Create a single message
 
 ### Rooms
 
 Rooms are virtual meeting spaces where people post messages and collaborate on work. Use the Rooms API to create and delete rooms and update rooms to change their titles or make them public.
 
+* `GET /v1/rooms`: List all of your rooms
+* `GET /v1/rooms/{roomId}`: List a single room
+* `DELETE /v1/rooms/{roomId}`: Delete a single room
+
+
 ### Teams
 
 Teams are groups of people with a set of rooms that are visible to all members of that team. Use the Teams API to create and delete teams and update teams to change their names.
 
+* `GET /v1/teams`: List all of teams
+* `POST /v1/teams`: Create a team
+* `GET /v1/teams/{teamId}`: List a single team
+* `DELETE /v1/teams/{teamId}`: Delete a single team
+
 ### People
 
 People are registered users of Webex. Use the People API to list, create, update, and delete users.
+
+* `GET /v1/people`: List all people
+* `GET /v1/people/{personId}`: List a single person
+* `DELETE /v1/people/{personId}`: Delete a single person
 
 ## Example Usage
 
