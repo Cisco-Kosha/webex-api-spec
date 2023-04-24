@@ -2,6 +2,8 @@
 
 ![Webex](images/webex.png)
 
+Webex is known for its video conferencing and screen sharing, but messaging is a core element of the platform due to the relaxed and straightforward nature of the medium. Messages are conversational, fluid, and natural without requiring the participants of the chat to be engaged at that very moment. Participants can review and respond to chats when its convenient to their needs and circumstances.
+
 Primarily known for its video conferencing capabilities, the Webex platform also includes a powerful messaging application. 
 
 The Kosha Webex Messaging connector enables you to perform REST API operations from the Webex Messaging API in your Kosha workflow or custom application. Using the Kosha Webex Messaging connector, you can directly access the Webex platform to:
