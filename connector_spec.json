@@ -3,12 +3,12 @@
   "fields": [
     {
       "field": "BEARER_TOKEN",
-      "displayName": "Webex Bearer Token",
+      "displayName": "Webex Access Token",
       "type": "String",
       "minLength": 4,
       "maxLength": 60,
       "required": true,
-      "description": "Webex Bearer Token",
+      "description": "Webex Access Token",
       "example": "YmU3NjZlNDItZjZiMy00NzIwLTgwYzItZjY2Zjc5ZmNhYWQwZWIxMZE8OWOtMmQl_PF84_1eb65fdf-0000-417f-9974-ad52cae0e10f",
       "helpSection": "Go to https://developer.webex.com/docs/getting-started and you will find your personal access token"
     },
