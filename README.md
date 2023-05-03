@@ -4,57 +4,75 @@
 
 Webex is known for its video conferencing and screen sharing, but messaging is a core element of the platform due to the relaxed and straightforward nature of the medium. Messages are conversational, fluid, and natural without requiring the participants of the chat to be engaged at that very moment. Participants can review and respond to chats when its convenient to their needs and circumstances.
 
-The Messaging API is an easy-to-use Restful platform that allows you to create, update, and delete messages. Every message is tagged with sender information (who wrote the message) and the local timestamp (what time did they sent it relative to you). Alternatively, you can change the format of the messages sent (between plain text or markdown) or send a file attachment along with your message to the chat room.
+Primarily known for its video conferencing capabilities, the Webex platform also includes a powerful messaging application. 
 
-## What is possible with Webex APIs?
-
-The Webex APIs provide your applications with direct access to the Cisco Webex Platform, giving you the ability to:
+The Kosha Webex Messaging connector enables you to perform REST API operations from the Webex Messaging API in your Kosha workflow or custom application. Using the Kosha Webex Messaging connector, you can directly access the Webex platform to:
 
 * Create a Webex space and invite people
 * Search for people in your company
 * Post messages in a Webex space
 * Get Webex space history or be notified in real-time when new messages are posted by others
 * Execute a command on a Webex RoomOS device
-and much more!
-
-
-The Webex APIs are RESTful. In REST, each resource is represented by a base URL like /messages and the HTTP methods GET, POST, PUT and DELETE are used to request data and perform actions on those resources.
-
-For methods that accept request parameters the platform accepts either `application/json` or `application/x-www-form-urlencoded` content types and currently only supports returning data in `application/json` format.
-
 
 ## Useful Actions 
 
+You can use the Kosha Webex Messaging connector to manage messages, rooms, teams, and people.  
+
+Refer to the Kosha Webex connector [API specification](openapi.json) for details.
+
 ### Messages
 
-Messages are how you communicate in a room. In Webex, each message is displayed on its own line along with a timestamp and sender information. Use this API to list, create, update, and delete messages.
+ In Webex, messages are sent directly between users or between multiple users in rooms. Use the messages API to send messages.
 
-Message can contain plain text, rich text, and a file attachment.
-
-Just like in the Webex app, you must be a member of the room in order to target it with this API.
+* `POST /v1/messages`: Create a single message
 
 ### Rooms
 
-Rooms are virtual meeting places where people post messages and collaborate to get work done. This API is used to manage the rooms themselves. Rooms are created and deleted with this API. You can also update a room to change its title or make it public, for example.
+Rooms are virtual meeting spaces where people post messages and collaborate on work. Use the Rooms API to create and delete rooms and update rooms to change their titles or make them public.
 
-To create a team room, specify the a teamId in the POST payload. Note that once a room is added to a team, it cannot be moved.
+* `GET /v1/rooms`: List all of your rooms
+* `GET /v1/rooms/{roomId}`: List a single room
+* `DELETE /v1/rooms/{roomId}`: Delete a single room
 
-### Teams
 
-Teams are groups of people with a set of rooms that are visible to all members of that team. This API is used to manage the teams themselves. Teams are created and deleted with this API. You can also update a team to change its name, for example.
+### Teams
+
+Teams are groups of people with a set of rooms that are visible to all members of that team. Use the Teams API to create and delete teams and update teams to change their names.
+
+* `GET /v1/teams`: List all of teams
+* `POST /v1/teams`: Create a team
+* `GET /v1/teams/{teamId}`: List a single team
+* `DELETE /v1/teams/{teamId}`: Delete a single team
 
 ### People
 
-People are registered users of Webex. Searching and viewing People requires an auth token with a scope of spark:people_read. Viewing the list of all People in your Organization requires an administrator auth token with spark-admin:people_read scope. Adding, updating, and removing People requires an administrator auth token with the spark-admin:people_write and spark-admin:people_read scope.
+People are registered users of Webex. Use the People API to list, create, update, and delete users.
 
-Refer to the Webex connector [API specification](openapi.json) for details.
+* `GET /v1/people`: List all people
+* `GET /v1/people/{personId}`: List a single person
+* `DELETE /v1/people/{personId}`: Delete a single person
 
 ## Example Usage
 
-< sdk example? >
+The following request creates a message in a room: 
+
+```
+curl --request POST \
+  --header "Authorization: Bearer ACCESS_TOKEN" \
+  --url https://webexapis.com/v1/messages
+{
+  "roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vYmJjZWIxYWQtNDNmMS0zYjU4LTkxNDctZjE0YmIwYzRkMTU0",
+  "parentId": "Y2lzY29zcGFyazovL3VzL01FU1NBR0UvZWM1ZTIzZjAtN2RhMS0xMWU5LTg2NTgtZTkzYzNiODZjZmFm",
+  "toPersonId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMDZkNzFhNS0wODMzLTRmYTUtYTcyYS1jYzg5YjI1ZWVlMmX",
+  "toPersonEmail": "julie@example.com",
+  "text": "PROJECT UPDATE - A new project plan has been published on Box: http://box.com/s/lf5vj. The PM for this project is Mike C. and the Engineering Manager is Jane W.",
+  "markdown": "**PROJECT UPDATE** A new project plan has been published [on Box](http://box.com/s/lf5vj). The PM for this project is <@personEmail:mike@example.com> and the Engineering Manager is <@personEmail:jane@example.com>.",
+  "files": [
+    "http://www.example.com/images/media.png"
+  ],
+}
+```
 
 ## Authentication
 
-To use the Webex REST API, you'll need a Webex account. The connector uses API_KEY based auth using your personal access token.
-
- In REST, each command is represented by a base URL like /messages and the HTTP methods GET, POST, PUT and DELETE are used to perform tasks such as request data or perform actions on those resources such as configure your device, start video calls from code, create custom In-Room Controls, and deploy Macros on your devices.
+To authenticate when provisioning the Kosha Webex connector, you need your [personal access token](https://developer.webex.com/docs/getting-started#/docs/getting-started#personal-access-token).
