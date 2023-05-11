@@ -1,7 +1,5 @@
 # Kosha Webex Messaging Connector
 
-![Webex](images/webex.png)
-
 Primarily known for its video conferencing capabilities, the Webex platform also includes a powerful messaging application. 
 
 The Kosha Webex Messaging connector enables you to perform REST API operations from the Webex Messaging API in your Kosha workflow or custom application. Using the Kosha Webex Messaging connector, you can directly access the Webex platform to:
