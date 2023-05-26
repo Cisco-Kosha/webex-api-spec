@@ -35,3 +35,9 @@ People are registered users of Webex. Use the People API to list, create, update
 ## Authentication
 
 To authenticate when provisioning the Kosha Webex connector, you need your [personal access token](https://developer.webex.com/docs/getting-started#/docs/getting-started#personal-access-token).
+
+## Kosha Connector Open Source Development
+
+All connectors Kosha shares on the marketplace are open source. We believe in fostering collaboration and open development. Everyone is welcome to contribute their ideas, improvements, and feedback for any Kosha connector. We encourage community engagement and appreciate any contributions that align with our goals of an open and collaborative API management platform.
+
+Refer to the contribution guidelines for details.
